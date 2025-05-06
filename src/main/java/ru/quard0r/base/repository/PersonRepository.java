@@ -5,6 +5,9 @@ import org.springframework.stereotype.Repository;
 import ru.quard0r.base.entity.Person;
 
 @Repository
-public interface PersonRepository extends JpaRepository<Person, Integer> {
+public interface PersonRepository extends JpaRepository<Person, Long> {
+
+ void deleteById(Long id);
 
 }
+

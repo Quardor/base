@@ -18,7 +18,7 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public Optional<Category> findById(int id) {
+    public Optional<Category> findById(long id) {
         return categoryRepository.findById(id);
     }
 
@@ -36,5 +36,9 @@ public class CategoryService {
 
     public void delete(Category category) {
         categoryRepository.delete(category);
+    }
+
+    public void deleteById(long id) {
+        categoryRepository.deleteById(id);
     }
 }

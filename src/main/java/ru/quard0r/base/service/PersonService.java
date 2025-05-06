@@ -18,7 +18,7 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
-    public Optional<Person> findId(int id) {
+    public Optional<Person> findById(long id) {
         return personRepository.findById(id);
     }
 
@@ -32,5 +32,9 @@ public class PersonService {
 
     public void delete(Person person) {
         personRepository.delete(person);
+    }
+
+    public void deleteById(long id) {
+        personRepository.deleteById(id);
     }
 }
