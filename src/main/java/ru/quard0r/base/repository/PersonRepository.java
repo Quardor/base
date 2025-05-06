@@ -7,6 +7,4 @@ import ru.quard0r.base.entity.Person;
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Integer> {
 
-
-
 }
