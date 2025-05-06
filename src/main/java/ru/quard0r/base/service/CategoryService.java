@@ -30,6 +30,10 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
+    public List<Category> findAllByIds(List<Long> ids) {
+        return categoryRepository.findAllById(ids);
+    }
+
     public void save(Category category) {
         categoryRepository.save(category);
     }
