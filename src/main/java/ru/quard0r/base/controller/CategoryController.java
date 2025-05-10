@@ -8,6 +8,8 @@ import ru.quard0r.base.service.CategoryService;
 import java.util.ArrayList;
 import java.util.List;
 
+@RestController
+@RequestMapping("/api/categories")
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -39,8 +41,18 @@ public class CategoryController {
     }
 
     @PostMapping("/save")
-    public void save(@RequestBody Category category) {
+    public void save(@RequestBody CategoryDTO categoryDTO) {
+        Category category = new Category();
+        category.setName(categoryDTO.getName());
         categoryService.save(category);
+    }
+
+    @PutMapping("/update")
+    public void update(@RequestBody CategoryDTO categoryDTO) {
+        categoryService.findById(categoryDTO.getId()).ifPresent(category -> {
+            category.setName(categoryDTO.getName());
+            categoryService.save(category);
+        });
     }
 
     @DeleteMapping("/delete/{id}")

@@ -41,8 +41,18 @@ public class PersonController {
     }
 
     @PostMapping("/save")
-    public void save(@RequestBody Person person) {
+    public void save(@RequestBody PersonDTO personDTO) {
+        Person person = new Person();
+        person.setName(personDTO.getName());
         personService.save(person);
+    }
+
+    @PutMapping("/update")
+    public void update(@RequestBody PersonDTO personDTO) {
+        personService.findById(personDTO.getId()).ifPresent(person -> {
+            person.setName(personDTO.getName());
+            personService.save(person);
+        });
     }
 
     @DeleteMapping("/delete/{id}")

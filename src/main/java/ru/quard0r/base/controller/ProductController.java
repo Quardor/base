@@ -1,7 +1,6 @@
 package ru.quard0r.base.controller;
 
 import org.springframework.web.bind.annotation.*;
-import ru.quard0r.base.dto.PersonDTO;
 import ru.quard0r.base.dto.ProductDTO;
 import ru.quard0r.base.entity.Category;
 import ru.quard0r.base.entity.Product;
@@ -65,8 +64,22 @@ public class ProductController {
     }
 
     @PostMapping("/save")
-    public void save(@RequestBody Product product) {
+    public void save(@RequestBody ProductDTO productDTO) {
+        Product product = new Product();
+        product.setName(productDTO.getName());
+        product.setPrice(productDTO.getPrice());
+        product.setCategories(productDTO.getCategories());
         productService.save(product);
+    }
+
+    @PutMapping("/update")
+    public void update(@RequestBody ProductDTO productDTO) {
+        productService.findById(productDTO.getId()).ifPresent(product -> {
+            product.setName(productDTO.getName());
+            product.setPrice(productDTO.getPrice());
+            product.setCategories(productDTO.getCategories());
+            productService.save(product);
+        });
     }
 
     @DeleteMapping("/delete/{id}")
